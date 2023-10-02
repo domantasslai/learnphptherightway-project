@@ -4,28 +4,14 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//$invoice = new \App\Invoice(15);
-//
-//$invoice->amount = 35;
-//
-//var_dump(isset($invoice->amount));
-//var_dump($invoice);
-//unset($invoice->amount);
-//
-//var_dump($invoice);
+//$classA = new \App\ClassA();
+//$classB = new \App\ClassB();
 
-//$invoice = new \App\Invoice();
-//\App\Invoice::process(1, 2, 3);
-//$invoice->process(1, 2, 3);
-//$invoice->process(15, 'Some description');
+//echo $classA->getName() . PHP_EOL;
+//echo $classB->getName() . PHP_EOL;
 
-//$invoice = new \App\Invoice();
-//var_dump($invoice instanceof Stringable);
+//echo \App\ClassA::getName() . PHP_EOL;
+//echo \App\ClassB::getName() . PHP_EOL;
 
-
-//$invoice = new \App\Invoice();
-//var_dump(is_callable($invoice));
-//$invoice();
-
-$invoice = new \App\Invoice();
-var_dump($invoice);
+var_dump( \App\ClassA::make()) . PHP_EOL;
+var_dump( \App\ClassB::make()) . PHP_EOL;
