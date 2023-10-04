@@ -8,10 +8,18 @@ class Invoice
     public function __construct()
     {
         $this->id = uniqid('invoice_');
+
+        var_dump('__construct');
     }
 
-    public static function create(): static
+    public function __clone(): void
     {
-        return new static();
+        $this->id = uniqid('invoice_');
+        var_dump('__clone');
     }
+
+//    public static function create(): static
+//    {
+//        return new static();
+//    }
 }

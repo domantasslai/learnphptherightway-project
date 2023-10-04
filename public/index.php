@@ -9,4 +9,6 @@ $invoice = new \App\Invoice();
 
 $invoice2 = new $invoice();
 
-var_dump($invoice, $invoice2, \App\Invoice::create());
+$invoice3 = clone $invoice;
+
+var_dump($invoice, $invoice2, $invoice3);
