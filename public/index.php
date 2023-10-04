@@ -4,17 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// single line comment
 
-# single line comment
+$invoice = new \App\Invoice();
 
-/*
- * multi-line comment
-*/
+$invoice2 = new $invoice();
 
-/**
- *  Docblock
- *
- * @param
- * @return
- */
+var_dump($invoice, $invoice2, \App\Invoice::create());
