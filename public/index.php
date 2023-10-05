@@ -6,23 +6,51 @@ use App\Invoice;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$invoice = new Invoice(25, 'Invoice 1', '123456789');
 
-//echo serialize(true) . PHP_EOL;
-//echo serialize(1) . PHP_EOL;
-//echo serialize(2.5) . PHP_EOL;
-//echo serialize('Hello world') . PHP_EOL;
-//echo serialize([1, 2, 3]) . PHP_EOL;
-//var_dump(unserialize(serialize(['a' => 1, 'b' => 2]))) . PHP_EOL;
+//var_dump(process());
+function foo()
+{
+    echo 'foo' . PHP_EOL;
 
-//echo serialize($invoice) . PHP_EOL;
+    return false;
+}
 
-//$str = serialize($invoice);
-//$invoice2 = unserialize($str);
-//var_dump($invoice, $invoice2, $invoice === $invoice2);
+function process()
+{
+    $invoice = new Invoice(
+        new \App\Customer(['foo' => 'bar'])
+    );
 
-//var_dump(unserialize('O:11:"App\Invoice":1:{s:2:"id";s:21:"invoice_651da74319e7f";}'));
+    try {
+        $invoice->process(-25);
 
-$str = serialize($invoice);
-echo $str . PHP_EOL;
-var_dump(unserialize($str));
+        return true;
+    } catch (\App\Exception\MissingBillingInfoException $e) {
+        echo $e->getMessage() . ' ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
+
+        return false;
+    } catch (\InvalidArgumentException) {
+        echo 'Invalid argument exception' . PHP_EOL;
+
+        return foo();
+    } finally {
+        echo 'Finally block' . PHP_EOL;
+
+        return -1;
+    }
+}
+
+
+//set_exception_handler(function (\Throwable $e) {
+//    var_dump($e->getMessage());
+//});
+
+//try {
+//    echo array_rand([], 1);
+//} catch (\Throwable $e) {
+//    echo $e->getMessage() . ' ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
+//}
+
+$invoice = new Invoice(new \App\Customer());
+
+$invoice->process(-25);
