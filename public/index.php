@@ -3,54 +3,34 @@
 declare(strict_types=1);
 
 use App\Invoice;
+use App\InvoiceCollection;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-
-//var_dump(process());
-function foo()
-{
-    echo 'foo' . PHP_EOL;
-
-    return false;
+foreach (['a', 'b', 'c', 'd', 'e'] as $key => $value) {
+    echo $key . '  = ' . $value . PHP_EOL;
 }
 
-function process()
-{
-    $invoice = new Invoice(
-        new \App\Customer(['foo' => 'bar'])
-    );
-
-    try {
-        $invoice->process(-25);
-
-        return true;
-    } catch (\App\Exception\MissingBillingInfoException $e) {
-        echo $e->getMessage() . ' ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
-
-        return false;
-    } catch (\InvalidArgumentException) {
-        echo 'Invalid argument exception' . PHP_EOL;
-
-        return foo();
-    } finally {
-        echo 'Finally block' . PHP_EOL;
-
-        return -1;
-    }
-}
-
-
-//set_exception_handler(function (\Throwable $e) {
-//    var_dump($e->getMessage());
-//});
-
-//try {
-//    echo array_rand([], 1);
-//} catch (\Throwable $e) {
-//    echo $e->getMessage() . ' ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
+//foreach (new Invoice(25) as $key => $value) {
+//    echo $key . '  = ' . $value . PHP_EOL;
 //}
 
-$invoice = new Invoice(new \App\Customer());
 
-$invoice->process(-25);
+$invoiceCollection = new InvoiceCollection([new Invoice(15), new Invoice(25), new Invoice(35)]);
+
+echo $invoiceCollection->count() . PHP_EOL;
+
+foreach ($invoiceCollection as $invoice) {
+    echo $invoice->id . ' - ' . $invoice->id . PHP_EOL;
+}
+
+foo($invoiceCollection);
+foo([]);
+foo(new \App\Collection([154]));
+
+function foo(iterable $iterable)
+{
+    foreach ($iterable as $value) {
+
+    }
+}

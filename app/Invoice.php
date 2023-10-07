@@ -2,33 +2,13 @@
 
 namespace App;
 
-use App\Exception\MissingBillingInfoException;
-
 class Invoice
 {
-    public function __construct(
-        public Customer $customer,
-    )
+    /** @var string|int */
+    public string|int $id;
+
+    public function __construct(public float $amount)
     {
-    }
-
-
-    public function process(float $amount): void
-    {
-        if ($amount <= 0) {
-//            throw new \InvalidArgumentException('Invalid invoice amount');
-            throw InvoiceException::invalidAmount('Invalid invoice amount');
-        }
-
-        if (empty($this->customer->getBillingInfo())) {
-//            throw new MissingBillingInfoException();
-            throw InvoiceException::missingBillingInfo();
-        }
-
-        echo 'Processing $' . $amount . ' invoice -';
-
-        sleep(1);
-
-        echo 'OK' . PHP_EOL;
+        $this->id = random_int(1000, 99999);
     }
 }
